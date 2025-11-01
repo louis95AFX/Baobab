@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baobab Creations - Cakes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-indigo-500 to-purple-600 text-white py-6">
+        <div class="container mx-auto px-6 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <img src="item1.png" alt="Baobab Creations Logo" class="h-12 w-auto">
+                <h1 class="text-2xl font-bold">Baobab Creations</h1>
+            </div>
+            <nav class="space-x-4">
+                <a href="index.html" class="hover:underline">Home</a>
+                <a href="personalised.html" class="hover:underline">Event Services</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="py-20 bg-gradient-to-r from-indigo-400 to-purple-500 text-white text-center">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4">Our Cakes</h2>
+        <p class="text-lg md:text-xl">Choose from our delicious, custom-made cakes</p>
+    </section>
+
+    <!-- Cakes Grid -->
+    <section class="py-16 container mx-auto px-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            
+            <!-- Cake Item -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col">
+                <img src="item7.jpg" alt="Chocolate Cake" class="w-full h-48 object-cover">
+                <div class="p-4 flex flex-col flex-grow">
+                    <h3 class="text-xl font-semibold mb-2">Chocolate Cake</h3>
+                    <p class="text-gray-600 mb-4">R350</p>
+                    <button onclick="addToCart('Chocolate Cake', 350)" class="mt-auto px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Cake Item -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col">
+                <img src="item8.jpg" alt="Vanilla Cake" class="w-full h-48 object-cover">
+                <div class="p-4 flex flex-col flex-grow">
+                    <h3 class="text-xl font-semibold mb-2">Vanilla Cake</h3>
+                    <p class="text-gray-600 mb-4">R300</p>
+                    <button onclick="addToCart('Vanilla Cake', 300)" class="mt-auto px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Cake Item -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col">
+                <img src="item9.jpg" alt="Red Velvet Cake" class="w-full h-48 object-cover">
+                <div class="p-4 flex flex-col flex-grow">
+                    <h3 class="text-xl font-semibold mb-2">Red Velvet Cake</h3>
+                    <p class="text-gray-600 mb-4">R400</p>
+                    <button onclick="addToCart('Red Velvet Cake', 400)" class="mt-auto px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition">Add to Cart</button>
+                </div>
+            </div>
+
+            <!-- Add more cakes here -->
+
+        </div>
+    </section>
+
+    <!-- Cart Modal -->
+    <div id="cartModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-lg p-6 w-80 max-w-full">
+            <h3 class="text-xl font-bold mb-4">Cart</h3>
+            <ul id="cartItems" class="mb-4 space-y-2"></ul>
+            <p id="cartTotal" class="font-semibold mb-4">Total: R0</p>
+            <button onclick="closeCart()" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition mr-2">Close</button>
+            <button class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition">Checkout</button>
+        </div>
+    </div>
+
+    <!-- View Cart Button -->
+    <button onclick="showCart()" class="fixed bottom-6 right-6 bg-indigo-600 text-white px-6 py-3 rounded-full shadow-lg hover:bg-indigo-700 transition">View Cart</button>
+
+    <!-- Scripts -->
+    <script>
+        let cart = [];
+
+        function addToCart(name, price) {
+            cart.push({name, price});
+            alert(`${name} added to cart!`);
+        }
+
+        function showCart() {
+            const cartModal = document.getElementById('cartModal');
+            const cartItems = document.getElementById('cartItems');
+            const cartTotal = document.getElementById('cartTotal');
+
+            // Clear previous items
+            cartItems.innerHTML = '';
+
+            // Add items
+            let total = 0;
+            cart.forEach((item, index) => {
+                total += item.price;
+                const li = document.createElement('li');
+                li.className = "flex justify-between";
+                li.innerHTML = `${item.name} - R${item.price} <button onclick="removeItem(${index})" class="text-red-600 hover:underline">Remove</button>`;
+                cartItems.appendChild(li);
+            });
+
+            cartTotal.textContent = `Total: R${total}`;
+            cartModal.classList.remove('hidden');
+            cartModal.classList.add('flex');
+        }
+
+        function closeCart() {
+            document.getElementById('cartModal').classList.add('hidden');
+        }
+
+        function removeItem(index) {
+            cart.splice(index, 1);
+            showCart();
+        }
+    </script>
+
+</body>
+</html>

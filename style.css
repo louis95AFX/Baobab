@@ -1,0 +1,43 @@
+/* Custom styles that complement Tailwind */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Animation for service cards hover */
+.service-card-hover {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card-hover:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Section padding for mobile */
+@media (max-width: 768px) {
+    section {
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+    }
+}
